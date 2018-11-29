@@ -1,6 +1,7 @@
 import json
 import requests
 from flask import Flask, render_template
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -20,7 +21,9 @@ def movies():
                     "image_url": "https://ksassets.timeincuk.net/wp/uploads/sites/55/2018/02/KXC1W2-920x584.jpg"
                     }
                     """
-    return render_template('movie.html', movie={})
+
+    parsed_json = json.loads(json_string)
+    return render_template('movie.html', movie=parsed_json)
 
 
 @app.route('/tvshows')
@@ -75,6 +78,8 @@ def dog_breeds():
     to them as a list to the user as a bullet pointed list
     """
     return render_template('dogs.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
